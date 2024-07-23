@@ -1,0 +1,91 @@
+No JavaScript, var, let, e const são palavras-chave usadas para declarar variáveis, mas elas têm diferenças importantes em termos de escopo, mutabilidade e hoisting. Vamos detalhar cada uma:
+
+var
+Escopo de Função:
+
+Variáveis declaradas com var têm escopo de função. Isso significa que elas são acessíveis em qualquer lugar dentro da função onde foram declaradas.
+Se declaradas fora de qualquer função, elas têm escopo global.
+Hoisting:
+
+Declarações de variáveis com var são "içadas" (hoisted) para o topo de seu escopo. No entanto, a inicialização não é içada.
+Você pode acessar a variável antes de sua declaração, mas ela será undefined.
+Reatribuição e Redeclaração:
+
+Variáveis var podem ser reatribuídas e redeclaradas dentro do mesmo escopo.
+javascript
+Copiar código
+console.log(a); // undefined (hoisting)
+var a = 10;
+
+function test() {
+  var b = 20;
+  console.log(b); // 20
+}
+console.log(b); // ReferenceError: b is not defined
+let
+Escopo de Bloco:
+
+Variáveis declaradas com let têm escopo de bloco. Isso significa que elas são acessíveis apenas dentro do bloco {} onde foram declaradas.
+Hoisting:
+
+Declarações de let são içadas, mas não inicializadas. Você não pode acessar a variável antes de sua declaração no código (causará um ReferenceError).
+Reatribuição e Redeclaração:
+
+Variáveis let podem ser reatribuídas, mas não podem ser redeclaradas no mesmo escopo.
+javascript
+Copiar código
+console.log(x); // ReferenceError: x is not defined (temporal dead zone)
+let x = 10;
+
+if (true) {
+  let y = 20;
+  console.log(y); // 20
+}
+console.log(y); // ReferenceError: y is not defined
+const
+Escopo de Bloco:
+
+Assim como let, variáveis declaradas com const têm escopo de bloco.
+Hoisting:
+
+Declarações de const são içadas, mas não inicializadas. Você não pode acessar a variável antes de sua declaração no código (causará um ReferenceError).
+Reatribuição e Redeclaração:
+
+Variáveis const não podem ser reatribuídas após a inicialização.
+Elas não podem ser redeclaradas no mesmo escopo.
+A constante deve ser inicializada no momento da declaração.
+javascript
+Copiar código
+const PI = 3.14;
+PI = 3.1415; // TypeError: Assignment to constant variable
+
+if (true) {
+  const z = 30;
+  console.log(z); // 30
+}
+console.log(z); // ReferenceError: z is not defined
+Resumo das Diferenças:
+Escopo:
+
+var: Escopo de função ou global.
+let e const: Escopo de bloco.
+Hoisting:
+
+var: Içada e inicializada como undefined.
+let e const: Içadas, mas não inicializadas (temporal dead zone).
+Reatribuição e Redeclaração:
+
+var: Pode ser reatribuída e redeclarada no mesmo escopo.
+let: Pode ser reatribuída, mas não pode ser redeclarada no mesmo escopo.
+const: Não pode ser reatribuída ou redeclarada; deve ser inicializada na declaração.
+Mutabilidade:
+
+var e let: Variáveis podem ser reatribuídas.
+const: Valor não pode ser reatribuído, mas objetos e arrays podem ter suas propriedades ou elementos modificados.
+javascript
+Copiar código
+const arr = [1, 2, 3];
+arr.push(4); // Funciona
+console.log(arr); // [1, 2, 3, 4]
+
+arr = [5, 6, 7]; // TypeError: Assignment to constant variable
